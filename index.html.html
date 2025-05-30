@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H & A Technologies - A Pinnacle of Science </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #ffffff;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 3rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a365d;
+            text-decoration: none;
+            letter-spacing: -0.025em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Logo container */
+        .logo-container {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a365d 0%, #3498db 100%);
+            position: relative;
+        }
+
+        /* Actual logo image */
+        .logo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: white;
+            border-radius: 6px;
+        }
+
+        /* Fallback logo text when no image */
+        .logo-fallback {
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Logo upload instruction */
+        .logo-upload-hint {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.6rem;
+            color: #718096;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-container:hover .logo-upload-hint {
+            opacity: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 0;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item > a {
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 1rem 1.5rem;
+            display: block;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-item:hover > a,
+        .nav-item.active > a {
+            color: #1a365d;
+            background: #f7fafc;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            min-width: 250px;
+            z-index: 1001;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            color: #4a5568;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #f7fafc;
+            cursor: pointer;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            color: #1a365d;
+            background: #f7fafc;
+        }
+
+        /* Page Content */
+        .page-content {
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+
+        .page {
+            display: none;
+            min-height: calc(100vh - 80px);
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        /* Animated Instruments - Larger Connected Chain on Right Side */
+        .instruments-showcase {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .instruments-chain {
+            position: absolute;
+            right: 30px;
+            width: 220px;
+            height: 1200px;
+            animation: continuousVerticalMove 15s linear infinite;
+        }
+
+        @keyframes continuousVerticalMove {
+            0% {
+                transform: translateY(100vh);
+            }
+            100% {
+                transform: translateY(-100vh);
+            }
+        }
+
+        .instrument-box {
+            position: relative;
+            background: white;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #1a365d;
+            font-size: 0.9rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            margin: 0;
+            width: 220px;
+        }
+
+        .instrument-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .instrument-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border-color: #3498db;
+        }
+
+        /* Connected instruments without gaps - larger sizes based on actual images */
+        .dsc { 
+            height: 180px;
+            border-radius: 15px 15px 0 0;
+            position: relative;
+            top: 0;
+        }
+
+        .dilatometer { 
+            height: 160px;
+            border-radius: 0;
+            margin-top: -2px;
+            border-top: none;
+        }
+
+        .tempchek { 
+            height: 140px;
+            border-radius: 0;
+            margin-top: -2px;
+            border-top: none;
+        }
+
+        .temptab { 
+            height: 120px;
+            border-radius: 0;
+            margin-top: -2px;
+            border-top: none;
+        }
+
+        .viscometer { 
+            height: 200px;
+            border-radius: 0 0 15px 15px;
+            margin-top: -2px;
+            border-top: none;
+        }
+
+        /* Instrument labels on the left side - positioned further left */
+        .instrument-label {
+            position: absolute;
+            right: 230px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(26, 54, 93, 0.9);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0.9;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Enhanced fade effects */
+        .instruments-showcase::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, 
+                rgba(247, 250, 252, 0.9) 0%, 
+                transparent 12%, 
+                transparent 88%, 
+                rgba(247, 250, 252, 0.9) 100%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #4a5568;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: #1a365d;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2c5282;
+            transform: translateY(-1px);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a365d;
+            display: block;
+        }
+
+        .stat-label {
+            color: #4a5568;
+            margin-top: 0.5rem;
+        }
+
+        /* About Page Styles */
+        .about-hero {
+            background: #1a365d;
+            color: white;
+            padding: 6rem 0 4rem;
+            text-align: center;
+        }
+
+        .about-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin: 4rem 0;
+        }
+
+        .about-content h2 {
+            color: #1a365d;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-content h3 {
+            color: #1a365d;
+            font-size: 1.3rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .about-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .about-content li {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .about-content li span {
+            position: absolute;
+            left: 0;
+            color: #3498db;
+        }
+
+        .mission-box {
+            background: #f8f9fa;
+            padding: 3rem;
+            border-radius: 12px;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .mission-box h3 {
+            color: #1a365d;
+            margin-bottom: 1rem;
+        }
+
+        .mission-box p {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #4a5568;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Product Image Containers */
+        .product-image-container {
+            width: 100%;
+            height: 200px;
+            border: 2px dashed #cbd5e0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            background: #f8f9fa;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .image-placeholder {
+            text-align: center;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        .upload-instruction {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: rgba(26, 54, 93, 0.8);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 1rem;
+        }
+
+        .product-card p {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        /* Contact Page */
+        .contact-hero {
+            background: #2c5282;
+            color: white;
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-top: 2rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info h3 {
+            color: #1a365d;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            background: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .contact-details h4 {
+            color: #1a365d;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .contact-details p {
+            color: #4a5568;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1a365d;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a202c;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #3498db;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #2d3748;
+            color: #a0aec0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hero-container { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-content { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+            .contact-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showPage('home')">
+                <div class="logo-container">
+                    <img src="./images/logo.png" alt="H&A Technologies Logo" class="logo-image" id="logoImage" style="display: none;">
+                    <div class="logo-fallback" id="logoFallback">H&A</div>
+                    <div class="logo-upload-hint">Add logo.png to images folder</div>
+                </div>
+                H & A Technologies
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a onclick="showPage('home')">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a onclick="showPage('about')">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a onclick="showPage('products')">Products</a>
+                    <div class="dropdown">
+                        <div class="dropdown-item" onclick="showPage('thermal-analyzers')">Thermal Analyzers</div>
+                        <div class="dropdown-item" onclick="showPage('lab-consumables')">Lab Consumables</div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a onclick="showPage('contact')">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="page-content">
+        
+        <!-- HOME PAGE -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <div class="hero-container">
+                    <div class="hero-content">
+                        <h1>Your Trusted Partner in Analytical Instruments and Laboratory Consumables</h1>
+                        <h2 style="font-size: 1.8rem; font-weight: 500; color: #3498db; margin-bottom: 2rem; line-height: 1.3;">H & A Technologies - A Pinnacle of Science</h2>
+                        <p>H & A Technologies provides technologically superior, cost-effective precision equipment for analyzing material characteristics and thermal processing. Trusted by laboratories worldwide for over a decade.</p>
+                        <button class="btn btn-primary" onclick="showPage('products')">Explore Our Products</button>
+                    </div>
+                    <div class="instruments-showcase">
+                        <div class="instruments-chain">
+                            <!-- 1st: DSC TGA -->
+                            <div class="instrument-box dsc">
+                                <img src="./images/dsc.jpg" alt="DSC TGA">
+                                <div class="instrument-label">DSC TGA</div>
+                            </div>
+                            
+                            <!-- 2nd: Dilatometer -->
+                            <div class="instrument-box dilatometer">
+                                <img src="./images/dilatometer.Png" alt="Dilatometer">
+                                <div class="instrument-label">Dilatometer</div>
+                            </div>
+                            
+                            <!-- 3rd: Viscometer -->
+                            <div class="instrument-box tempchek">
+                                <img src="./images/Viscometer.jpg" alt="Viscometer">
+                                <div class="instrument-label">Viscometer</div>
+                            </div>
+                            
+                            <!-- 4th: Pyrometric Cones -->
+                            <div class="instrument-box temptab">
+                                <img src="./images/Pyrometric.Png" alt="Pyrometric Cones">
+                                <div class="instrument-label">Pyrometric Cones</div>
+                            </div>
+                            
+                            <!-- 5th: Crucibles -->
+                            <div class="instrument-box viscometer">
+                                <img src="./images/Crucibles.Png" alt="Crucibles">
+                                <div class="instrument-label">Crucibles</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="stat-number">10+</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">800+</span>
+                            <span class="stat-label">Instruments Deployed</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">99.9%</span>
+                            <span class="stat-label">Precision Accuracy</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">125+</span>
+                            <span class="stat-label">Years Orton Heritage</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ABOUT US PAGE -->
+        <div id="about" class="page">
+            <section class="about-hero">
+                <div class="container">
+                    <h1>About H & A Technologies</h1>
+                    <p>A Pinnacle of Science - Your Trusted Partner Since 2020</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="about-content">
+                        <div>
+                            <h2>Who We Are</h2>
+                            <p>H & A Technologies stands as a beacon of excellence in the analytical instrumentation industry. For over a decade, we have been the trusted partner for laboratories, research institutions, and industrial facilities worldwide, providing cutting-edge analytical instruments and laboratory consumables that drive scientific discovery and innovation.</p>
+                            
+                            <p>Founded on the principles of precision, reliability, and customer satisfaction, we specialize in offering technologically superior solutions that meet the evolving needs of modern laboratories. Our comprehensive portfolio spans thermal analysis instruments, material characterization equipment, and essential laboratory consumables.</p>
+
+                            <h3>Our Legacy</h3>
+                            <p>Many instruments deployed globally and a precision accuracy rate of 99.9%, we have established ourselves as leaders in analytical excellence. Our partnership with the Edward Orton Jr. Ceramic Foundation, with its 125+ years of heritage, further strengthens our commitment to providing world-class thermal analysis solutions.</p>
+                        </div>
+                        <div>
+                            <h3>Our Core Values</h3>
+                            <ul>
+                                <li>
+                                    <span>✓</span>
+                                    <strong>Scientific Excellence:</strong> Delivering instruments that set industry standards for precision and reliability
+                                </li>
+                                <li>
+                                    <span>✓</span>
+                                    <strong>Customer Partnership:</strong> Building long-term relationships based on trust, support, and shared success
+                                </li>
+                                <li>
+                                    <span>✓</span>
+                                    <strong>Innovation Leadership:</strong> Continuously advancing analytical technology to meet tomorrow's challenges
+                                </li>
+                                <li>
+                                    <span>✓</span>
+                                    <strong>Quality Assurance:</strong> Maintaining the highest standards in every instrument and service we provide
+                                </li>
+                                <li>
+                                    <span>✓</span>
+                                    <strong>Global Reach:</strong> Supporting laboratories worldwide with comprehensive solutions and expert guidance
+                                </li>
+                            </ul>
+
+                            <h3>Why Choose H & A Technologies?</h3>
+                            <p>Our commitment goes beyond supplying instruments. We provide complete analytical solutions, from initial consultation and equipment selection to installation, training, and ongoing technical support. Our team of experienced professionals ensures that every client receives personalized attention and solutions tailored to their specific analytical requirements.</p>
+                        </div>
+                    </div>
+
+                    <div class="mission-box">
+                        <h3>Our Mission</h3>
+                        <p>"To empower scientific discovery and innovation by providing the world's most reliable and precise analytical instruments and laboratory consumables, while building lasting partnerships that drive success in research, quality control, and industrial applications."</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PRODUCTS PAGE -->
+        <div id="products" class="page">
+            <section class="section">
+                <div class="container">
+                    <h1 class="section-title">Our Product Categories</h1>
+                    <div class="products-grid">
+                        <div class="product-card" onclick="showPage('thermal-analyzers')">
+                            <h3>Thermal Analyzers</h3>
+                            <p>Comprehensive range of thermal analysis instruments including DSC, TGA, STA, Dilatometers, and Viscometers for material characterization and research applications.</p>
+                            <p style="color: #3498db; font-weight: 600; margin-top: 1rem;">View Thermal Analyzers →</p>
+                        </div>
+                        <div class="product-card" onclick="showPage('lab-consumables')">
+                            <h3>Lab Consumables</h3>
+                            <p>High-quality laboratory consumables, pyrometric monitoring devices, and accessories to support your analytical workflows and instrument operations.</p>
+                            <p style="color: #3498db; font-weight: 600; margin-top: 1rem;">View Lab Consumables →</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- THERMAL ANALYZERS PAGE -->
+        <div id="thermal-analyzers" class="page">
+            <section class="section">
+                <div class="container">
+                    <h1 class="section-title">Thermal Analyzers</h1>
+                    <h2 style="text-align: center; color: #e53e3e; margin-bottom: 3rem;">Orton Ceramic Foundation Products</h2>
+                    
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                <img src="./images/dsc-system.jpg" alt="DSC System">
+                                <div class="image-placeholder">
+                                    <p></p>
+                                    <small></small>
+                                </div>
+                            </div>
+
+                            <h3>DSC/DTA Systems</h3>
+                            <p><strong>Differential Scanning Calorimetry</strong></p>
+                            <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                                <li>Temperature Range: -150°C to 750°C</li>
+                                <li>Heating Rate: 0.1 to 200°C/min</li>
+                                <li>Sensitivity: < 0.2 μW</li>
+                                <li>Sample Size: 0.1 to 50 mg</li>
+                            </ul>
+                            <p>High-precision thermal analysis for measuring heat flow and temperature transitions in materials.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                <img src="./images/tga-system.jpg" alt="TGA System">
+                                <div class="image-placeholder">
+                                    <p></p>
+                                    <small></small>
+                                </div>
+                            </div>
+                            <h3>TGA Systems</h3>
+                            <p><strong>Thermogravimetric Analysis</strong></p>
+                            <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                                <li>Balance Sensitivity: 0.1 μg</li>
+                                <li>Temperature Range: RT to 1500°C</li>
+                                <li>Weight Capacity: 1g maximum</li>
+                                <li>Atmosphere Control: Inert/Oxidizing</li>
+                            </ul>
+                            <p>Precise measurement of weight changes in materials as a function of temperature or time.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                <img src="./images/dilatometer.Png" alt="Dilatometer">
+                                <div class="image-placeholder">
+                                    <p></p>
+                                    <small></small>
+                                </div>
+                            </div>
+                            <h3>Orton Dilatometer Series</h3>
+                            <p><strong>Precision thermal expansion measurement instruments</strong></p>
+                            <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                                <li>Temperature Range: -190 to 1600°C</li>
+                                <li>Resolution: 0.1 μm</li>
+                                <li>Sample Length: 12-16 inch zones</li>
+                                <li>Applications: Ceramics, Glass, Refractories</li>
+                            </ul>
+                            <p>Essential for determining coefficient of thermal expansion (CTE) of ceramics, glass, and advanced materials.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                <img src="./images/Viscometer.jpg" alt="Viscometer">
+                                <div class="image-placeholder">
+                                    <p></p>
+                                    <small></small>
+                                </div>
+                            </div>
+                            <h3>Glass Viscometer Systems</h3>
+                            <p><strong>High-temperature viscosity measurement</strong></p>
+                            <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                                <li>Temperature Range: RT to 1700°C</li>
+                                <li>Viscosity Range: 10^8 to 10^15 Poise</li>
+                                <li>Test Methods: Fiber Elongation, Rod</li>
+                                <li>Standards: ASTM C338, C336</li>
+                            </ul>
+                            <p>Determine softening point, annealing point, strain point, and viscosity characteristics of glass compositions.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                <img src="./images/sta-system.jpg" alt="STA System">
+                                <div class="image-placeholder">
+                                    <p></p>
+                                    <small></small>
+                                </div>
+                            </div>
+                            <h3>STA Systems</h3>
+                            <p><strong>Simultaneous Thermal Analysis</strong></p>
+                            <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                                <li>DSC Sensitivity: < 1 μW</li>
+                                <li>TGA Resolution: 0.1 μg</li>
+                                <li>Temperature Range: RT to 1600°C</li>
+                                <li>Sample Size: 0.1 to 900 mg</li>
+                            </ul>
+                            <p>Combined DSC and TGA measurements in a single instrument for comprehensive thermal analysis.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                <img src="./images/gradient-furnace.jpg" alt="Gradient Furnace">
+                                <div class="image-placeholder">
+                                    <p></p>
+                                    <small></small>
+                                </div>
+                            </div>
+                            <h3>Gradient Furnace Systems</h3>
+                            <p><strong>Advanced temperature gradient analysis</strong></p>
+                            <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                                <li>Temperature Range: 500°C to 1400°C</li>
+                                <li>Gradient Length: 300mm</li>
+                                <li>Temperature Accuracy: ±2°C</li>
+                                <li>Applications: Liquidus, Devitrification</li>
+                            </ul>
+                            <p>For glass crystal formation analysis and liquidus temperature determination.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- LAB CONSUMABLES PAGE -->
+        <div id="lab-consumables" class="page">
+            <section class="section">
+                <div class="container">
+                    <h1 class="section-title">Lab Consumables</h1>
+                    <h2 style="text-align: center; color: #e53e3e; margin-bottom: 3rem;">Aluminum Weighing Boats & Consumables</h2>
+                    
+                    <div class="products-grid">
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                <img src="./images/aluminum-boats-tabs.jpg" alt="Aluminum Boats with Tabs">
+                                <div class="image-placeholder">
+                                    <p></p>
+                                    <small></small>
+                                </div>
+                            </div>
+                            <h3>Aluminum Boats with Tabs</h3>
+                            <p><strong>Precision weighing boats with convenient tabs</strong></p>
+                            <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                                <li><strong>8ml:</strong> OD 28mm × Depth 10mm × Thickness 0.1mm</li>
+                                <li><strong>30ml:</strong> OD 50mm × Depth 14mm × Thickness 0.1mm</li>
+                                <li><strong>60ml:</strong> OD 60mm × Depth 18mm × Thickness 0.1mm</li>
+                                <li><strong>80ml:</strong> OD 77mm × Depth 18mm × Thickness 0.1mm</li>
+                            </ul>
+                            <p>High-quality aluminum weighing boats with tabs for easy handling during analytical procedures.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                <img src="./images/aluminum-boats-smooth.jpg" alt="Aluminum Boats Smooth Walls">
+                                <div class="image-placeholder">
+                                    <p></p>
+                                    <small></small>
+                                </div>
+                            </div>
+                            <h3>Aluminum Boats with Smooth Walls</h3>
+                            <p><strong>Smooth-walled design for optimal sample handling</strong></p>
+                            <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                                <li><strong>60ml:</strong> Dia 72mm × Depth 18mm × Thickness 0.12mm</li>
+                                <li><strong>135ml:</strong> Dia 103mm × Depth 19mm × Thickness 0.16mm</li>
+                            </ul>
+                            <p>Premium aluminum boats with smooth interior walls for contamination-free sample preparation.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                <img src="./images/microweighing-boats.jpg" alt="Microweighing Boats">
+                                <div class="image-placeholder">
+                                    <p></p>
+                                    <small></small>
+                                </div>
+                            </div>
+                            <h3>Microweighing Boats</h3>
+                            <p><strong>Ultra-precise micro-volume weighing solutions</strong></p>
+                            <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                                <li><strong>40 μL:</strong> Round 6mm Dia × 1.5mm Height</li>
+                                <li><strong>60 μL:</strong> Round 6mm Dia × 2.5mm Height</li>
+                                <li><strong>250 μL:</strong> Round with Handle 11mm Dia × 6mm Height</li>
+                                <li><strong>350 μL:</strong> Round with Handle 13mm Dia × 3.5mm Height</li>
+                                <li><strong>500 μL:</strong> Round with Handle 13mm Dia × 6mm Height</li>
+                                <li><strong>2500 μL:</strong> Round with Handle 20mm Dia × 8mm Height</li>
+                            </ul>
+                            <p>Specialized microweighing boats for precise handling of small sample volumes in analytical applications.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                <img src="./images/rectangular-boats.jpg" alt="Rectangular Boats">
+                                <div class="image-placeholder">
+                                    <p></p>
+                                    <small></small>
+                                </div>
+                            </div>
+                            <h3>Rectangular Microweighing Boats</h3>
+                            <p><strong>Rectangular design for specific sample types</strong></p>
+                            <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                                <li><strong>75 μL:</strong> 9mm L × 4mm W × 2.5mm H with Handle</li>
+                                <li><strong>120 μL:</strong> 12mm L × 4mm W × 2.7mm H with Handle</li>
+                                <li><strong>180 μL:</strong> 12mm L × 4mm W × 4mm H with Handle</li>
+                                <li><strong>400 μL:</strong> 12mm L × 6mm W × 6mm H with Handle</li>
+                                <li><strong>1120 μL:</strong> 25mm L × 7mm W × 7mm H with Handle</li>
+                                <li><strong>7ml:</strong> Rectangle 65mm L × 17mm W × 10mm H</li>
+                            </ul>
+                            <p>Rectangular microweighing boats designed for samples requiring specific geometric containment.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                <img src="./images/aluminum-shovels.jpg" alt="Aluminum Shovels">
+                                <div class="image-placeholder">
+                                    <p></p>
+                                    <small></small>
+                                </div>
+                            </div>
+                            <h3>Aluminum Shovels</h3>
+                            <p><strong>Precision sample transfer tools</strong></p>
+                            <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                                <li><strong>Big Shovel:</strong> 16mm L × 7mm W</li>
+                                <li><strong>Small Shovel:</strong> 10mm L × 7mm W</li>
+                            </ul>
+                            <p>High-quality aluminum shovels for precise sample transfer and handling in laboratory applications.</p>
+                        </div>
+
+                        <div class="product-card">
+                            <div class="product-image-container">
+                                <img src="./images/moisture-pans.jpg" alt="Moisture Pans">
+                                <div class="image-placeholder">
+                                    <p></p>
+                                    <small></small>
+                                </div>
+                            </div>
+                            <h3>Disposable Moisture Pans</h3>
+                            <p><strong>Specialized pans for moisture analysis</strong></p>
+                            <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                                <li><strong>60ml:</strong> 103mm OD × 8mm Depth × 0.1mm Thickness</li>
+                                <li><strong>90ml:</strong> 126mm OD × 5mm Depth × 0.1mm Thickness</li>
+                            </ul>
+                            <p>Disposable aluminum pans specifically designed for moisture analysis and drying applications.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div id="contact" class="page">
+            <section class="contact-hero">
+                <div class="container">
+                    <h1>Contact Us</h1>
+                    <p>Get in touch with our technical experts for personalized solutions</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="contact-container">
+                    <div class="contact-form">
+                        <h2 style="text-align: center; margin-bottom: 2rem; color: #1a365d;">Request Information</h2>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="company">Company/Institution</label>
+                                <input type="text" id="company" name="company">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="product">Product Interest</label>
+                                <select id="product" name="product">
+                                    <option value="">Select a product category</option>
+                                    <option value="thermal-analyzers">Thermal Analyzers</option>
+                                    <option value="lab-consumables">Lab Consumables</option>
+                                    <option value="dsc-tga">DSC/TGA Systems</option>
+                                    <option value="dilatometer">Dilatometer</option>
+                                    <option value="viscometer">Viscometer</option>
+                                    <option value="pyrometric-cones">Pyrometric Cones</option>
+                                    <option value="crucibles">Crucibles & Sample Pans</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" placeholder="Please describe your requirements or questions..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                        </form>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-details">
+                                <h4>Address</h4>
+                                <p>Ambattur, Chennai<br>Tamil Nadu - 600053<br>India</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-details">
+                                <h4>Phone</h4>
+                                <p>+91 89043 22676 , +91 73054 23149</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <p>info@ha-technologies.com, sales@ha-technologies.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">🌐</div>
+                            <div class="contact-details">
+                                <h4>Website</h4>
+                                <p>www.ha-technologies.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">🕒</div>
+                            <div class="contact-details">
+                                <h4>Business Hours</h4>
+                                <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 1:00 PM<br>Sunday: Closed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>H & A Technologies</h4>
+                    <p>Your trusted partner in analytical instruments and laboratory consumables. A pinnacle of science since 2020.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Products</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin: 0.5rem 0;"><a href="#" style="color: #a0aec0; text-decoration: none;" onclick="showPage('thermal-analyzers')">Thermal Analyzers</a></li>
+                        <li style="margin: 0.5rem 0;"><a href="#" style="color: #a0aec0; text-decoration: none;" onclick="showPage('lab-consumables')">Lab Consumables</a></li>
+                        <li style="margin: 0.5rem 0;"><a href="#" style="color: #a0aec0; text-decoration: none;">Orton Products</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin: 0.5rem 0;"><a href="#" style="color: #a0aec0; text-decoration: none;">Technical Support</a></li>
+                        <li style="margin: 0.5rem 0;"><a href="#" style="color: #a0aec0; text-decoration: none;">Training</a></li>
+                        <li style="margin: 0.5rem 0;"><a href="#" style="color: #a0aec0; text-decoration: none;">Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 H & A Technologies. All rights reserved. | Precision Analytical Instrumentation</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Page navigation function
+        function showPage(pageId) {
+            console.log('Navigating to page:', pageId);
+            
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                console.log('Successfully showing page:', pageId);
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                console.error('Page not found:', pageId);
+            }
+            
+            // Update active navigation
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+        }
+
+        // Logo image handler
+        function loadLogo() {
+            const logoImage = document.getElementById('logoImage');
+            const logoFallback = document.getElementById('logoFallback');
+            
+            if (logoImage && logoFallback) {
+                // Try to load the image
+                const testImage = new Image();
+                testImage.onload = function() {
+                    logoImage.style.display = 'block';
+                    logoFallback.style.display = 'none';
+                };
+                testImage.onerror = function() {
+                    logoImage.style.display = 'none';
+                    logoFallback.style.display = 'flex';
+                };
+                testImage.src = './images/logo.png';
+            }
+        }
+
+        // Form submission handler
+        function setupForm() {
+            const form = document.getElementById('contactForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your inquiry! We will contact you soon.');
+                    form.reset();
+                });
+            }
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, initializing...');
+            loadLogo();
+            setupForm();
+            showPage('home');
+        });
+
+        // Also initialize on window load as backup
+        window.addEventListener('load', function() {
+            console.log('Window loaded, ensuring initialization...');
+            loadLogo();
+            setupForm();
+            showPage('home');
+        });
+    </script>
+</body>
+</html>
+                
