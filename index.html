@@ -689,48 +689,202 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .nav-menu { display: none; }
-            .hero-container { grid-template-columns: 1fr; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .about-content { grid-template-columns: 1fr; }
-            .footer-content { grid-template-columns: 1fr; }
-            .contact-container { grid-template-columns: 1fr; }
-        }
+        /* Mobile Navigation - Hamburger Menu */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: #1a365d;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #1a365d;
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+/* Show hamburger on mobile */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
+        flex-direction: column;
+        padding: 1rem 0;
+    }
+    
+    .nav-menu.active {
+        display: flex;
+    }
+    
+    .nav-item {
+        width: 100%;
+    }
+    
+    .nav-item > a {
+        display: block;
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #f7fafc;
+        width: 100%;
+        text-align: left;
+    }
+    
+    .nav-item:last-child > a {
+        border-bottom: none;
+    }
+    
+    /* Mobile dropdown */
+    .dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        background: #f8f9fa;
+        border-radius: 0;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .dropdown-item {
+        padding: 0.8rem 2rem;
+        border-bottom: 1px solid #e9ecef;
+        background: #f8f9fa;
+    }
+    
+    /* Hide complex animations on mobile */
+    .instruments-showcase {
+        display: none;
+    }
+    
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+        text-align: center;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.3rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .section {
+        padding: 2rem 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .logo {
+        font-size: 1.4rem;
+    }
+}
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo" onclick="showPage('home')">
-                <div class="logo-container">
-                    <img src="./images/logo.png" alt="H&A Technologies Logo" class="logo-image" id="logoImage" style="display: none;">
-                    <div class="logo-fallback" id="logoFallback">H&A</div>
-                    <div class="logo-upload-hint">Add logo.png to images folder</div>
+   <nav class="navbar">
+    <div class="nav-container">
+        <a href="#" class="logo" onclick="showPage('home')">
+            <div class="logo-container">
+                <img src="./images/logo.png" alt="H&A Technologies Logo" class="logo-image" id="logoImage" style="display: none;">
+                <div class="logo-fallback" id="logoFallback">H&A</div>
+                <div class="logo-upload-hint">Add logo.png to images folder</div>
+            </div>
+            H & A Technologies
+        </a>
+        
+        <!-- Mobile menu toggle button -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <ul class="nav-menu" id="navMenu">
+            <li class="nav-item">
+                <a onclick="showPage('home'); closeMobileMenu();">Home</a>
+            </li>
+            <li class="nav-item">
+                <a onclick="showPage('about'); closeMobileMenu();">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a onclick="showPage('products'); closeMobileMenu();">Products</a>
+                <div class="dropdown">
+                    <div class="dropdown-item" onclick="showPage('thermal-analyzers'); closeMobileMenu();">Thermal Analyzers</div>
+                    <div class="dropdown-item" onclick="showPage('lab-consumables'); closeMobileMenu();">Lab Consumables</div>
                 </div>
-                H & A Technologies
-            </a>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a onclick="showPage('home')">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a onclick="showPage('about')">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a onclick="showPage('products')">Products</a>
-                    <div class="dropdown">
-                        <div class="dropdown-item" onclick="showPage('thermal-analyzers')">Thermal Analyzers</div>
-                        <div class="dropdown-item" onclick="showPage('lab-consumables')">Lab Consumables</div>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a onclick="showPage('contact')">Contact Us</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+            </li>
+            <li class="nav-item">
+                <a onclick="showPage('contact'); closeMobileMenu();">Contact Us</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
     <!-- Page Content -->
     <div class="page-content">
@@ -1270,6 +1424,42 @@
         // Page navigation function
         function showPage(pageId) {
             console.log('Navigating to page:', pageId);
+             // Mobile menu functions
+function toggleMobileMenu() {
+    const navMenu = document.getElementById('navMenu');
+    const menuToggle = document.getElementById('mobileMenuToggle');
+    
+    navMenu.classList.toggle('active');
+    menuToggle.classList.toggle('active');
+}
+
+function closeMobileMenu() {
+    const navMenu = document.getElementById('navMenu');
+    const menuToggle = document.getElementById('mobileMenuToggle');
+    
+    navMenu.classList.remove('active');
+    menuToggle.classList.remove('active');
+}
+
+function setupMobileMenu() {
+    const menuToggle = document.getElementById('mobileMenuToggle');
+    if (menuToggle) {
+        menuToggle.addEventListener('click', toggleMobileMenu);
+    }
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const navMenu = document.getElementById('navMenu');
+        const menuToggle = document.getElementById('mobileMenuToggle');
+        
+        if (navMenu && menuToggle) {
+            if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        }
+    });
+}
             
             // Hide all pages
             const pages = document.querySelectorAll('.page');
