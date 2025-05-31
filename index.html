@@ -1420,116 +1420,116 @@
         </div>
     </footer>
 
-    <script>
-        // Page navigation function
-        function showPage(pageId) {
-            console.log('Navigating to page:', pageId);
-             // Mobile menu functions
-function toggleMobileMenu() {
-    const navMenu = document.getElementById('navMenu');
-    const menuToggle = document.getElementById('mobileMenuToggle');
-    
-    navMenu.classList.toggle('active');
-    menuToggle.classList.toggle('active');
-}
-
-function closeMobileMenu() {
-    const navMenu = document.getElementById('navMenu');
-    const menuToggle = document.getElementById('mobileMenuToggle');
-    
-    navMenu.classList.remove('active');
-    menuToggle.classList.remove('active');
-}
-
-function setupMobileMenu() {
-    const menuToggle = document.getElementById('mobileMenuToggle');
-    if (menuToggle) {
-        menuToggle.addEventListener('click', toggleMobileMenu);
+   <script>
+    // Page navigation function
+    function showPage(pageId) {
+        console.log('Navigating to page:', pageId);
+        
+        // Hide all pages
+        const pages = document.querySelectorAll('.page');
+        pages.forEach(page => {
+            page.classList.remove('active');
+        });
+        
+        // Show selected page
+        const targetPage = document.getElementById(pageId);
+        if (targetPage) {
+            targetPage.classList.add('active');
+            console.log('Successfully showing page:', pageId);
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            console.error('Page not found:', pageId);
+        }
+        
+        // Update active navigation
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => item.classList.remove('active'));
     }
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
+
+    // Mobile menu functions (MOVED OUTSIDE showPage function)
+    function toggleMobileMenu() {
         const navMenu = document.getElementById('navMenu');
         const menuToggle = document.getElementById('mobileMenuToggle');
         
-        if (navMenu && menuToggle) {
-            if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
-                navMenu.classList.remove('active');
-                menuToggle.classList.remove('active');
-            }
+        navMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+    }
+
+    function closeMobileMenu() {
+        const navMenu = document.getElementById('navMenu');
+        const menuToggle = document.getElementById('mobileMenuToggle');
+        
+        navMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
+    }
+
+    function setupMobileMenu() {
+        const menuToggle = document.getElementById('mobileMenuToggle');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', toggleMobileMenu);
         }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const menuToggle = document.getElementById('mobileMenuToggle');
+            
+            if (navMenu && menuToggle) {
+                if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                    navMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                }
+            }
+        });
+    }
+
+    // Logo image handler
+    function loadLogo() {
+        const logoImage = document.getElementById('logoImage');
+        const logoFallback = document.getElementById('logoFallback');
+        
+        if (logoImage && logoFallback) {
+            // Try to load the image
+            const testImage = new Image();
+            testImage.onload = function() {
+                logoImage.style.display = 'block';
+                logoFallback.style.display = 'none';
+            };
+            testImage.onerror = function() {
+                logoImage.style.display = 'none';
+                logoFallback.style.display = 'flex';
+            };
+            testImage.src = './images/logo.png';
+        }
+    }
+
+    // Form submission handler
+    function setupForm() {
+        const form = document.getElementById('contactForm');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                alert('Thank you for your inquiry! We will contact you soon.');
+            });     
+        }
+    }
+
+    // Initialize everything when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Page loaded, initializing...');
+        loadLogo();
+        setupForm();
+        setupMobileMenu(); // ADD THIS LINE
+        showPage('home');
     });
-}
-            
-            // Hide all pages
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // Show selected page
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
-                console.log('Successfully showing page:', pageId);
-                
-                // Scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-                console.error('Page not found:', pageId);
-            }
-            
-            // Update active navigation
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => item.classList.remove('active'));
-        }
 
-        // Logo image handler
-        function loadLogo() {
-            const logoImage = document.getElementById('logoImage');
-            const logoFallback = document.getElementById('logoFallback');
-            
-            if (logoImage && logoFallback) {
-                // Try to load the image
-                const testImage = new Image();
-                testImage.onload = function() {
-                    logoImage.style.display = 'block';
-                    logoFallback.style.display = 'none';
-                };
-                testImage.onerror = function() {
-                    logoImage.style.display = 'none';
-                    logoFallback.style.display = 'flex';
-                };
-                testImage.src = './images/logo.png';
-            }
-        }
-
-        // Form submission handler
-        function setupForm() {
-            const form = document.getElementById('contactForm');
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                  alert('Thank you for your inquiry! We will contact you soon.');
-                   });     
-            }
-        }
-
-        // Initialize everything when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Page loaded, initializing...');
-            loadLogo();
-            setupForm();
-            showPage('home');
-        });
-
-        // Also initialize on window load as backup
-        window.addEventListener('load', function() {
-            console.log('Window loaded, ensuring initialization...');
-            loadLogo();
-            setupForm();
-            showPage('home');
-        });
-    </script>
-</body>
-</html>
-                
+    // Also initialize on window load as backup
+    window.addEventListener('load', function() {
+        console.log('Window loaded, ensuring initialization...');
+        loadLogo();
+        setupForm();
+        setupMobileMenu(); // ADD THIS LINE
+        showPage('home');
+    });
+</script>
